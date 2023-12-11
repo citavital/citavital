@@ -9,7 +9,7 @@ defineProps({
     <nav id="navbar" class="navbar navbar-expand-lg navbar-custom shadow">
         <div class="container">
             <a href="/">
-                <img src="../../../images/logo.jpg" class="navbar-brand" style="height: 90px;" alt="">
+                <img src="../../../images/logo.png" class="navbar-brand" style="height: 90px;" alt="">
             </a>
 
             <div id="navbarCollapse" class=" navbar-collapse">
@@ -26,9 +26,9 @@ defineProps({
                 </ul>
                 <div class="nav-button ms-auto">
                     <ul class="nav navbar-nav navbar-right">
-                        <template v-if="canLogin">
+                        <template v-if="$page.props.auth.user">
                             <li>
-                                <a href="/app"
+                                <a :href="route('dashboard')"
                                    class="btn btn-primary me-4 navbar-btn btn-rounded"
                                 >
                                     App
@@ -47,7 +47,7 @@ defineProps({
                         <template v-else>
                             <li>
                                 <a
-                                    href="/auth"
+                                    href="/login"
                                     class="btn btn-primary navbar-btn me-4 btn-rounded"
                                 >
                                     Iniciar Sesión
@@ -55,7 +55,7 @@ defineProps({
                             </li>
                             <li>
                                 <a
-                                    href="/auth"
+                                    href="/register"
                                     class="btn btn-primary navbar-btn btn-rounded"
                                 >
                                     Registro

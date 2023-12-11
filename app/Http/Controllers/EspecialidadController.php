@@ -6,7 +6,7 @@ use App\Models\Especialidad;
 use App\Http\Requests\StoreSpecialtyRequest;
 use App\Http\Requests\UpdateSpecialtyRequest;
 
-class SpecialtyController extends Controller
+class EspecialidadController extends Controller
 {
     /**
      * Display a listing of the resource.
