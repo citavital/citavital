@@ -5,3 +5,60 @@
 [x-cloak] {
     display: none;
 }
+
+.bg-overlay {
+    background: linear-gradient(to right, #CDF6FF,#1890ff );
+    opacity: 0.9;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.section{
+    padding-top: 80px;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+.home-half {
+    padding-bottom: 150px;
+    padding-top: 220px;
+}
+
+.bg-pattern-effect {
+    position: absolute;
+    bottom: -11px;
+    left: 0px;
+    right: 0px;
+}
+
+.doctor-img{
+    object-fit: contain;
+    width: auto;
+}
+
+.home-title{
+    font-family: "Rubik", sans-serif;
+    font-size: 3.5rem;
+    color:  rgba(0, 0, 0, 0.65);
+}
+
+.home-desc{
+    font-family: "Rubik", sans-serif;
+    color:  rgba(0, 0, 0, 0.65);
+}
+
+.btn{
+    margin-top: 20px;
+}
+
+.bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
+}
+
