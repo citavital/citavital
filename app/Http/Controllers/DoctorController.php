@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HistorialPaciente;
-use App\Http\Requests\StoreHistorialPacienteRequest;
-use App\Http\Requests\UpdateHistorialPacienteRequest;
+use App\Models\DoctorEspecialidad;
+use App\Http\Requests\StoreDoctorEspecialidadRequest;
+use App\Http\Requests\UpdateDoctorEspecialidadRequest;
+use Inertia\Inertia;
 
-class HistorialPacienteController extends Controller
+class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return Inertia::render('App/Doctores/DoctoresIndex');
     }
 
     /**
@@ -27,7 +28,7 @@ class HistorialPacienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHistorialPacienteRequest $request)
+    public function store(StoreDoctorEspecialidadRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class HistorialPacienteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HistorialPaciente $historialPaciente)
+    public function show(DoctorEspecialidad $doctorEspecialidad)
     {
         //
     }
@@ -43,7 +44,7 @@ class HistorialPacienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HistorialPaciente $historialPaciente)
+    public function edit(DoctorEspecialidad $doctorEspecialidad)
     {
         //
     }
@@ -51,7 +52,7 @@ class HistorialPacienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHistorialPacienteRequest $request, HistorialPaciente $historialPaciente)
+    public function update(UpdateDoctorEspecialidadRequest $request, DoctorEspecialidad $doctorEspecialidad)
     {
         //
     }
@@ -59,7 +60,7 @@ class HistorialPacienteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HistorialPaciente $historialPaciente)
+    public function destroy(DoctorEspecialidad $doctorEspecialidad)
     {
         //
     }

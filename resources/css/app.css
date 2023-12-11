@@ -62,3 +62,67 @@
     background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
 
+
+.text-hospital {
+    color: #91accb;
+}
+
+.bg-gray-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(250,254,254, var(--tw-bg-opacity));
+}
+
+.btn-white {
+    --tw-bg-opacity: 0.8;
+    background: white;
+    border: 1px solid #E7E7E7;
+    color: rgba(#3D6CB9, var(--tw-bg-opacity));
+}
+
+.btn-blue {
+    --tw-bg-opacity: 0.8;
+    background-color: #1898DF;
+    color: white;
+}
+
+.btn-blue:hover, .btn-blue:active, .btn-blue:focus {
+    background-color: #088fd2!important;
+    color: white!important;
+}
+.btn-dark-blue {
+    --tw-bg-opacity: 0.8;
+    background-color: #3D6CB9;
+    color: white;
+}
+
+.btn-dark-blue:hover, .btn-dark-blue:active, .btn-dark-blue:focus {
+    background-color: #2c5a9f !important;
+    color: white!important;
+}
+
+.btn-white:hover {
+    border: 1px solid #E7E7E7;
+    color: #3D6CB9;
+}
+
+.bg-blue {
+    background: #3D6CB9;
+    color: white;
+}
+
+.text-blue {
+    color: #3D6CB9;
+}
+
+.bg-light-blue {
+    background: #F1FAFF!important;
+}
+
+.bg-baby-blue {
+    background: #CAE6FF!important;
+}
+
+.bg-sky-blue {
+    background: #6EE2FC;
+}
+

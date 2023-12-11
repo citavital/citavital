@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,5 +38,8 @@ Route::middleware([
 
     Route::prefix('app')->group(function () {
         Route::resource('citas', CitaController::class);
+        Route::resource('pacientes', PacienteController::class);
+        Route::resource('doctores', DoctorController::class);
     });
+
 });

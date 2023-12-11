@@ -6,7 +6,7 @@
     <div class="bg-blue-500 min-h-screen">
         <div class="py-4 left-nav">
             <div class="py-2 w-100 nav-icon">
-                <a href="/app">
+                <a :href="route('dashboard')">
                 <span class="text-center w-100">
                     <i class="fa fa-home fs-3 w-100"></i>
                 </span>
@@ -14,7 +14,7 @@
                 </a>
             </div>
             <div class="py-2 w-100 nav-icon">
-                <a href="/app/citas">
+                <a :href="route('citas.index')">
                 <span class="text-center w-100">
                     <i class="fa fa-calendar fs-3 w-100"></i>
                 </span>
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="py-2 w-100 nav-icon">
-                <a href="/app/doctores">
+                <a :href="route('doctores.index')">
               <span class="text-center w-100">
                 <i class="fa fa-search fs-3 w-100"></i>
               </span>
