@@ -18,17 +18,17 @@ const getImg = ((img) => {
 <template>
     <AppLayout>
         <div class="row container-fluid py-2">
-            <div class="col-lg-5">
+            <div class="col-xl-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-8 border-end">
+                            <div class="col-lg-8 border-end">
                                 <img
                                     src="https://source.boringavatars.com/beam/120/Eunice%20Kennedy?colors=264653,f4a261,e76f51"
                                     class="mx-auto d-block img-fluid">
                                 <h3 class="fw-bolder text-center mt-2">John Doe</h3>
                                 <p class="fw-bold fs-5 text-center text-danger">Alergias</p>
-                                <div class="row">
+                                <div class="row text-center text-lg-start">
                                     <div class="col-lg-6">
                                         <span class="text-muted text-secondary fs-6">Fecha de Nacimiento</span>
                                         <p class="text-muted text-secondary fw-bold">26/11/1992</p>
@@ -68,7 +68,7 @@ const getImg = ((img) => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4 mt-2">
+                            <div class="col-lg-4 mt-2">
 
                                 <div class="mt-3" v-for="(indicador, index) of indicadores" :key="index">
                                     <img :src="getImg(indicador.img)" class="img-fluid d-block mx-auto p-2" style="max-height: 50px;">
@@ -80,7 +80,7 @@ const getImg = ((img) => {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mt-3 mt-lg-0">
+            <div class="col-xl-3 mt-3 mt-xl-0">
                 <!-- Medicamentos -->
                 <div class="card">
                     <div class="card-header bg-white">
@@ -128,8 +128,8 @@ const getImg = ((img) => {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mt-3 mt-lg-0">
-                <div class="card mt-3 mt-lg-0">
+            <div class="col-xl-3 mt-3 mt-xl-0">
+                <div class="card mt-3 mt-xl-0">
                     <div class="card-header bg-white">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="fs-4 text-body-tertiary fw-bold">Visitas</span>
