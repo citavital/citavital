@@ -4,15 +4,14 @@ namespace Database\Factories;
 
 use App\Models\Doctor;
 use App\Models\DoctorEspecialidad;
+use App\Models\DoctorHospital;
 use App\Models\Especialidad;
+use App\Models\Hospital;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DoctorEspecialidad>
- */
-class DoctorEspecialidadFactory extends Factory
+class DoctorHospitalFactory extends Factory
 {
-    protected $model = DoctorEspecialidad::class;
+    protected $model = DoctorHospital::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,8 @@ class DoctorEspecialidadFactory extends Factory
     {
         return [
             'doctor_id' => Doctor::all()->random()->id,
-            'especialidad_id' => Especialidad::all()->random()->id,
+            'hospital_id' => Hospital::all()->random()->id,
         ];
     }
 }
+

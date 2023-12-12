@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -80,8 +81,18 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function historial()
+    public function historial(): HasMany
     {
         return $this->hasMany(HistorialPaciente::class, 'paciente_id');
+    }
+
+    public function doctorHospital(): HasMany
+    {
+        return $this->hasMany(DoctorHospital::class, 'doctor_id');
+    }
+
+    public function doctorEspecialidad(): HasMany
+    {
+        return $this->hasMany(DoctorEspecialidad::class, 'doctor_id');
     }
 }

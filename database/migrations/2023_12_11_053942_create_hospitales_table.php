@@ -17,9 +17,9 @@ return new class extends Migration
             $table->longText('direccion');
             $table->decimal('latitud');
             $table->decimal('longitud');
-            $table->decimal('telefono_1');
-            $table->decimal('telefono_2');
-            $table->decimal('url')->nullable()->default(null);
+            $table->string('telefono_1');
+            $table->string('telefono_2')->nullable()->default(null);
+            $table->string('url')->nullable()->default(null);
             $table->timestamps();
         });
     }

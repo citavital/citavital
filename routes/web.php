@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\HistorialController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,8 +40,11 @@ Route::middleware([
     })->name('dashboard');
 
     Route::prefix('app')->group(function () {
+        Route::get('hospitales', [HospitalController::class, 'index'])->name('hospitales.index');
+        Route::get('especialidades', [EspecialidadController::class, 'index'])->name('especialidades.index');
         Route::resource('citas', CitaController::class);
         Route::resource('pacientes', PacienteController::class);
+        Route::get('doctores/list', [DoctorController::class, 'listado'])->name('doctores.list');
         Route::resource('doctores', DoctorController::class);
         Route::resource('historial', HistorialController::class);
     });

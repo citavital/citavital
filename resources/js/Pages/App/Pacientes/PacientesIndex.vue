@@ -1,6 +1,5 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { computed } from "vue";
 import PacienteCard from "@/Components/PacienteCard.vue";
 
 const props = defineProps({

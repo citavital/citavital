@@ -13,7 +13,8 @@ class EspecialidadController extends Controller
      */
     public function index()
     {
-        //
+        $data = Especialidad::orderBy('nombre')->get();
+        return compact('data');
     }
 
     /**

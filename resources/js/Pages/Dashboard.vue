@@ -1,23 +1,32 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import GenericCard from "@/Components/GenericCard.vue";
+import { reactive } from "vue";
 
 const misCitasLinks = [
     { texto: 'Ver Citas', link: 'citas.index', isExternalLink: false },
 ];
+
 const miPerfilLinks = [
     { texto: 'Mi Historial', link: 'pacientes.index', isExternalLink: false },
     { texto: 'Buscar Doctor', link: 'doctores.index', isExternalLink: false },
 ];
-const clinicasLinks = [
-    { texto: 'Pacifica Salud', link: 'https://www.pacificasalud.com/', img: '../../images/app/hospitales/pacifica-salud.png', isExternalLink: true },
-    { texto: 'Hospital Santa Fe', link: 'https://www.hospitalsantafepanama.com/', img: '../../images/app/hospitales/santa-fe.jpg', isExternalLink: true },
-    { texto: 'Hospital San Fernando', link: 'https://www.hospitalsanfernando.com/en/', img: '../../images/app/hospitales/san-fernando.png', isExternalLink: true },
-    { texto: 'Minimed', link: 'https://minimedpanama.com/', img: '../../images/app/hospitales/minimed.png', isExternalLink: true },
-    { texto: 'Hospital Nacional', link: 'https://www.hospitalnacional.com/', img: '../../images/app/hospitales/nacional.png', isExternalLink: true },
-    { texto: 'Clinica Hospital Mar del Sur', link: 'https://www.hospitalmardelsur.com/', img: '../../images/app/hospitales/mar-del-sur.png', isExternalLink: true },
-    { texto: 'Hospital Paitilla', link: 'https://hospitalpaitilla.com/', img: '../../images/app/hospitales/paitilla.png', isExternalLink: true },
-];
+
+const data = reactive({
+    hospitales: []
+});
+
+fetch(route('hospitales.index'))
+    .then(res => res.json())
+    .then(response => {
+        response.hospitales.forEach(item => {
+            data.hospitales.push({
+                texto: item.nombre,
+                link: item.url,
+                isExternalLink: true,
+            });
+        });
+    });
 
 </script>
 
@@ -74,8 +83,8 @@ const clinicasLinks = [
                     <GenericCard
                         title="Clinicas Afiliadas"
                         backgroundColor="bg-baby-blue"
-                        backgroundImage="../..//images/app/clinicas-afiliadas.png"
-                        :links="clinicasLinks">
+                        backgroundImage="../../images/app/clinicas-afiliadas.png"
+                        :links="data.hospitales">
                     </GenericCard>
                 </div>
             </div>
