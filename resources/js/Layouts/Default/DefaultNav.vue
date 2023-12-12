@@ -1,8 +1,14 @@
 <script setup>
+import { router } from "@inertiajs/vue3";
+
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
 });
+
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 <template>
 
@@ -35,19 +41,17 @@ defineProps({
                                 </a>
                             </li>
                             <li>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary me-4 navbar-btn btn-rounded"
-
-                                >
-                                    Cerrar sesión
-                                </button>
+                                <form method="POST" @submit.prevent="logout">
+                                    <button class="btn btn-primary me-4 navbar-btn btn-rounded">
+                                        Cerrar sesión
+                                    </button>
+                                </form>
                             </li>
                         </template>
                         <template v-else>
                             <li>
                                 <a
-                                    href="/login"
+                                    :href="route('login')"
                                     class="btn btn-primary navbar-btn me-4 btn-rounded"
                                 >
                                     Iniciar Sesión
@@ -55,7 +59,7 @@ defineProps({
                             </li>
                             <li>
                                 <a
-                                    href="/register"
+                                    :href="route('register')"
                                     class="btn btn-primary navbar-btn btn-rounded"
                                 >
                                     Registro

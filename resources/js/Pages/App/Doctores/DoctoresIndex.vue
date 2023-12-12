@@ -1,7 +1,9 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { computed, reactive } from "vue";
-import DoctorList from "@/Components/DoctorList.vue";
+import DoctorList from "@/Components/Doctores/DoctorList.vue";
+import DialogModal from "@/Components/DialogModal.vue";
+import DoctorShow from "@/Components/Doctores/DoctorShow.vue";
 
 const data = reactive({
     hospitales: [],
@@ -9,7 +11,18 @@ const data = reactive({
     especialidades: [],
     especialidad: null,
     doctores: [],
+    mostrarDoctor: false,
+    doctor: {},
 });
+
+const onClose = () => {
+    data.mostrarDoctor = false;
+};
+
+const onOpen = (doctor) => {
+    data.mostrarDoctor = true;
+    data.doctor = doctor;
+};
 
 const loadDoctores = () => {
     fetch(route('doctores.list', { hospital: data.hospital, especialidad: data.especialidad }))
@@ -47,6 +60,27 @@ fetch(route('especialidades.index'))
 </script>
 <template>
     <AppLayout title="Buscar Doctores">
+        <DialogModal
+            v-if="data.mostrarDoctor"
+            :show="data.mostrarDoctor"
+            max-width="7xl"
+            modal-class="h-100"
+            color="bg-indigo-200"
+            @close="onClose"
+        >
+            <template v-slot:title>
+                <div class="flex justify-end">
+                    <button type="button" @click="onClose">
+                        <i class="fa fa-xl fa-close text-danger"></i>
+                    </button>
+                </div>
+            </template>
+            <template v-slot:content>
+                <div class="h-100 w-full">
+                    <DoctorShow :doctor="data.doctor" />
+                </div>
+            </template>
+        </DialogModal>
         <div class="container my-3">
             <div class="row">
                 <div class="col-lg-3 offset-lg-2 px-1">
@@ -87,6 +121,7 @@ fetch(route('especialidades.index'))
                             v-for="(doctor, index) in data.doctores"
                             :key="doctor.id + '-' + index"
                             :info="doctor"
+                            @open="onOpen"
                             class="mt-3 col-lg-5 mx-2" />
                     </div>
                 </div>

@@ -1,8 +1,18 @@
 <script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+   tipoUsuario: String
+});
 
 const isActive = (routeName) => {
     return [ route().current(routeName) ? 'active' : '' ];
 }
+
+const isPaciente = computed(() => {
+    return props.tipoUsuario === 'paciente';
+});
+
 </script>
 
 <template>
@@ -16,7 +26,7 @@ const isActive = (routeName) => {
                     <p class="text-center w-100 py-2">Inicio</p>
                 </a>
             </div>
-            <div class="py-2 w-100 nav-icon" :class="isActive('citas.index')">
+            <div v-if="isPaciente" class="py-2 w-100 nav-icon" :class="isActive('citas.index')">
                 <a :href="route('citas.index')">
                 <span class="text-center w-100">
                     <i class="fa fa-calendar fs-3 w-100"></i>
@@ -24,7 +34,7 @@ const isActive = (routeName) => {
                     <p class="text-center w-100 p-2">Citas</p>
                 </a>
             </div>
-            <div class="py-2 w-100 nav-icon" :class="isActive('doctores.index')">
+            <div v-if="isPaciente" class="py-2 w-100 nav-icon" :class="isActive('doctores.index')">
                 <a :href="route('doctores.index')">
               <span class="text-center w-100">
                 <i class="fa fa-search fs-3 w-100"></i>
@@ -32,7 +42,7 @@ const isActive = (routeName) => {
                     <p class="text-center w-100 p-2">Buscar Doctores</p>
                 </a>
             </div>
-            <div class="py-2 w-100 nav-icon" :class="isActive('historial.index')">
+            <div v-if="isPaciente" class="py-2 w-100 nav-icon" :class="isActive('historial.index')">
                 <a :href="route('historial.index')">
                 <span class="text-center w-100">
                     <i class="fa fa-file-o fs-3 w-100"></i>

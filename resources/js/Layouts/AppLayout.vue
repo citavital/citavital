@@ -35,7 +35,7 @@ const logout = () => {
         <Banner />
 
         <div class="flex">
-            <LeftNav />
+            <LeftNav :tipo-usuario="$page.props.auth.user?.tipo_usuario" />
 
             <div class="min-h-screen bg-gray-100 w-100">
                 <nav class="bg-white border-b border-gray-100">

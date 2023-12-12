@@ -2,6 +2,8 @@
 import { computed, reactive } from "vue";
 import NavTabs from "@/Components/NavTabs.vue";
 
+const emit = defineEmits(['open']);
+
 const props = defineProps({
    info: Object,
 });
@@ -11,8 +13,11 @@ const data = reactive({
     currentTab: "",
 });
 
+const onOpen = () => {
+    emit('open', props.info);
+};
+
 const onTabChanged = (tab) => {
-    console.log('tab', tab);
     data.currentTab = tab;
 };
 
@@ -21,7 +26,6 @@ const isCurrentTab = (tab) => {
 };
 
 const tabClass = (tab) => {
-    console.log(tab);
     return isCurrentTab(tab) ? 'active' : '';
 };
 
@@ -49,12 +53,18 @@ if (data.tabs !== undefined) {
                     <span
                         v-for="(especialidad, index) of info.doctor_especialidad"
                         :key="index"
-                        class="badge rounded-pill text-bg-light">
+                        class="badge rounded-pill bg-blue-400 me-1">
                         {{ especialidad.especialidad.nombre }}
                     </span>
                 </div>
                 <div class="col-lg-3 text-center lg-text-left">
-                    <button class="btn btn-dark-blue float-center lg-float-end">Reservar</button>
+                    <button
+                        type="button"
+                        @click.prevent="onOpen"
+                        class="btn btn-dark-blue float-center lg-float-end"
+                    >
+                        Reservar
+                    </button>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PacienteController;
+use App\Models\Doctor;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,6 +48,10 @@ Route::middleware([
         Route::get('doctores/list', [DoctorController::class, 'listado'])->name('doctores.list');
         Route::resource('doctores', DoctorController::class);
         Route::resource('historial', HistorialController::class);
+    });
+
+    Route::get('/doctores-list', function () {
+        return Doctor::select('email')->get();
     });
 
 });

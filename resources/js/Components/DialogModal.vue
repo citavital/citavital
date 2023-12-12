@@ -16,6 +16,14 @@ defineProps({
         type: Boolean,
         default: true,
     },
+    modalClass: {
+        type: String,
+        default: '',
+    },
+    color: {
+        type: String,
+        default: 'bg-white'
+    }
 });
 
 const close = () => {
@@ -28,6 +36,8 @@ const close = () => {
         :show="show"
         :max-width="maxWidth"
         :closeable="closeable"
+        :modal-class="modalClass"
+        :color="color"
         @close="close"
     >
         <div class="px-6 py-4">
@@ -40,7 +50,7 @@ const close = () => {
             </div>
         </div>
 
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-end">
+        <div class="flex flex-row justify-end px-6 py-4 text-end">
             <slot name="footer" />
         </div>
     </Modal>
