@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('genero', ['hombre', 'mujer', 'otro'])->nullable()->default(null);
-            $table->enum('tipo_usurio', ['admin', 'paciente', 'doctor'])->default('paciente');
+            $table->enum('tipo_usuario', ['admin', 'paciente', 'doctor'])->default('paciente');
             $table->longText('direccion')->nullable()->default(null);
             $table->string('telefono')->nullable()->default(null);
             $table->string('celular')->nullable()->default(null);
             $table->decimal('altura')->nullable()->default(null);
             $table->decimal('peso')->nullable()->default(null);
             $table->decimal('imc')->nullable()->default(null);
-            $table->decimal('presion_arterial')->nullable()->default(null);
+            $table->string('presion_arterial')->nullable()->default(null);
             $table->date('nacimiento')->nullable()->default(null);
             $table->bigInteger('votos')->default(0);
             $table->decimal('rating', 4, 2)->default(0);

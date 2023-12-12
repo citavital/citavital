@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::middleware([
         Route::resource('citas', CitaController::class);
         Route::resource('pacientes', PacienteController::class);
         Route::resource('doctores', DoctorController::class);
+        Route::resource('historial', HistorialController::class);
     });
 
 });

@@ -10,6 +10,27 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * @property $id
+ * @property $name
+ * @property $email
+ * @property $tipo_usuario
+ * @property $nacimiento
+ * @property $genero
+ * @property $direccion
+ * @property $celular
+ * @property $telefono
+ * @property $altura
+ * @property $tipo_altura
+ * @property $peso
+ * @property $tipo_peso
+ * @property $imc
+ * @property $presion_arterial
+ * @property $alergias
+ * @since 1.0
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -58,4 +79,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function historial()
+    {
+        return $this->hasMany(HistorialPaciente::class, 'paciente_id');
+    }
 }

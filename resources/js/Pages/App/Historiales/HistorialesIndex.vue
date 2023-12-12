@@ -2,7 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 </script>
 <template>
-    <AppLayout title="Buscar Doctores">
-        <h1>Doctores</h1>
+    <AppLayout title="Historial">
+        <h1>Historial</h1>
     </AppLayout>
 </template>
