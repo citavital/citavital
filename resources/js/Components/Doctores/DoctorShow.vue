@@ -1,4 +1,6 @@
 <script setup>
+import FiltrarHoras from "@/Components/Doctores/FiltrarHoras.vue";
+
 const props = defineProps({
     doctor: Object,
 });
@@ -56,9 +58,14 @@ const props = defineProps({
                                     <li><i class="fa fa-check fa-xl text-success me-2"></i><span class="fs-5">Lorem ipsum</span></li>
                                 </ul>
                             </div>
-
+                            <hr class="mt-4">
+                            <div class="my-3">
+                                <!-- Calendario -->
+                                <FiltrarHoras :doctor="doctor" />
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
