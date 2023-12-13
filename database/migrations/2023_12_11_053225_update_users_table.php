@@ -35,7 +35,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('genero');
-            $table->dropColumn('tipo_usuario');
+            $table->dropColumn('tipo_usurio');
             $table->dropColumn('direccion');
             $table->dropColumn('telefono');
             $table->dropColumn('celular');
