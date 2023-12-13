@@ -21,12 +21,32 @@ class CitaController extends Controller
 
     public function lista()
     {
+        $mostrar = 'actuales';
+
+        if (request()->has('mostrar'))
+        {
+            $mostrar = request()->get('mostrar');
+        }
+
         $citas = Cita::with(['doctor', 'hospital'])
-            ->where('usuario_id', request()->user()->id)
-            ->where('cancelada', false)
-            ->where('fecha', '>=', date('Y-m-d'))
-            ->orderBy('fecha')
-            ->get();
+            ->where('usuario_id', request()->user()->id);
+
+        if ($mostrar == 'pasadas')
+        {
+            $citas = $citas->where('fecha', '<=', date('Y-m-d'))
+                ->where('cancelada', false);
+        }
+        else if($mostrar == 'actuales')
+        {
+            $citas = $citas->where('fecha', '>=', date('Y-m-d'))
+                ->where('cancelada', false);
+        }
+        else
+        {
+            $citas = $citas->where('cancelada', true);
+        }
+
+        $citas = $citas->orderBy('fecha')->get();
 
         return compact('citas');
     }
@@ -60,6 +80,11 @@ class CitaController extends Controller
 
     public function destroy(Cita $cita)
     {
+        if ($cita->cancelada || $cita->fecha < date('Y-m-d'))
+        {
+            return response()->json(['exito' => true]);
+        }
+
         DB::beginTransaction();
 
         $user = request()->user();

@@ -1,9 +1,10 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, watch } from "vue";
 
 const data = reactive({
     citas: [],
+    mostrar: 'actuales'
 });
 
 const onCancel = ((cita, index) => {
@@ -17,11 +18,19 @@ const onCancel = ((cita, index) => {
         });
 });
 
-onMounted(async() => {
-   fetch(route('citas.list'))
-       .then(res => res.json())
-       .then(response => data.citas = response.citas);
+watch(() => data.mostrar, async() => {
+    loadCitas();
 });
+
+onMounted(async() => {
+    loadCitas();
+});
+
+const loadCitas = () => {
+    fetch(route('citas.list', { mostrar: data.mostrar }))
+        .then(res => res.json())
+        .then(response => data.citas = response.citas);
+};
 
 </script>
 <template>
@@ -29,6 +38,16 @@ onMounted(async() => {
         <div class="container py-4">
 
             <div class="row">
+                <div class="col-lg-2">
+                    <select v-model="data.mostrar">
+                        <option value="actuales">Actuales</option>
+                        <option value="pasadas">Pasadas</option>
+                        <option value="canceladas">Canceladas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-3">
                 <div
                     v-for="(cita, index) of data.citas"
                     :key="index"
@@ -45,7 +64,7 @@ onMounted(async() => {
                                         <span>{{ cita.fecha }} - {{ cita.hora }}</span>
                                     </div>
                                     <div>
-                                        <button type="button" @click.prevent="onCancel(cita)">
+                                        <button v-if="data.mostrar === 'actuales'" type="button" @click.prevent="onCancel(cita)">
                                             <i class="fa fa-xl fa-close text-red-500"></i>
                                         </button>
                                     </div>
