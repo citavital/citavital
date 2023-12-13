@@ -15,9 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('doctor_id');
-            $table->enum('tipo_historial', ['exman', 'nota', 'medicamento']);
+            $table->enum('tipo_historial', ['examen', 'nota', 'medicamento']);
             $table->date('fecha');
-            $table->longText('comentarios');
+            $table->longText('comentarios')->nullable();
+            $table->longText('file_url')->nullable();
             $table->timestamps();
 
             $table->foreign('paciente_id')

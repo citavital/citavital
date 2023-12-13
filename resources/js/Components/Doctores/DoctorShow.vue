@@ -32,7 +32,6 @@ const openLink = ((link) => {
                                 </div>
                                 <div class="col-lg-6">
                                     <h2 class="fs-2 fw-bolder">{{ doctor.name }}</h2>
-
                                     <div class="text-center text-lg-start">
                                         <span
                                             v-for="(especialidad, index) of doctor.doctor_especialidad"

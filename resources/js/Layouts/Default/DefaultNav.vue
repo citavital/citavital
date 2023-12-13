@@ -15,7 +15,7 @@ const logout = () => {
     <nav id="navbar" class="navbar navbar-expand-lg navbar-custom shadow">
         <div class="container">
             <a href="/">
-                <img src="../../../images/logo.png" class="navbar-brand" style="height: 90px;" alt="">
+                <img src="https://citavitalassets.s3.amazonaws.com/images/logo.png" class="navbar-brand" style="height: 90px;" alt="">
             </a>
 
             <div id="navbarCollapse" class=" navbar-collapse">

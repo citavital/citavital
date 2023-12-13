@@ -50,6 +50,7 @@ if (data.tabs !== undefined) {
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">
                     <p class="mb-1 fw-bold fs-5">{{ info.name }}</p>
+                    <p class="mb-1">{{ info.email }}</p>
                     <span
                         v-for="(especialidad, index) of info.doctor_especialidad"
                         :key="index"

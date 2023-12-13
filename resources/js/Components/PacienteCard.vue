@@ -1,8 +1,7 @@
 <script setup>
 import { computed, reactive } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
-import Checkbox from "@/Components/Checkbox.vue";
 import Indicador from "@/Components/Indicador.vue";
 
 const data = reactive({
@@ -108,12 +107,9 @@ const getImg = ((img) => {
     return new URL(img, import.meta.url).href;
 });
 
-const indicadores = reactive([
-    { key: 'altura', img: '../../images/icons/Altura.png', texto: 'Altura', valor: altura, type: 'number' },
-    { key: 'peso', img: '../../images/icons/Peso.png', texto: 'Peso', valor: peso, type: 'number' },
-    { key: 'imc', img: '../../images/icons/IMC.png', texto: 'Masa Corporal', valor: imc, type: 'number' },
-    { key: 'presion_arterial', img: '../../images/icons/Presion.png', texto: 'Presión Arterial', valor: presionArterial, type: 'text' },
-]);
+const isPaciente = computed(() => {
+    return usePage().props?.auth?.user?.tipo_usuario === 'paciente';
+});
 
 const toggleEdit = () => {
     data.editMode = !data.editMode;
@@ -133,7 +129,7 @@ const submit = () => {
     <div class="card-body">
         <div class="row">
             <div class="col-lg-8 border-end">
-                <button v-if="myProfile" @click="toggleEdit" class="btn p-0 border-0 float-end">
+                <button @click="toggleEdit" class="btn p-0 border-0 float-end">
                     <i v-if="!data.editMode" class="fa fa-pencil text-success fa-lg"></i>
                     <i v-if="data.editMode" class="fa fa-close text-danger fa-lg"></i>
                 </button>
@@ -146,7 +142,9 @@ const submit = () => {
                     <div class="row text-center text-lg-start">
                         <div class="col-lg-6">
                             <span class="text-muted text-secondary fs-6">Fecha de Nacimiento</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ nacimiento }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">
+                                {{ nacimiento }}
+                            </p>
                             <input v-else type="date" class="form-control" v-model="form.nacimiento">
                             <InputError class="mt-2" :message="form.errors.nacimiento" />
                         </div>
@@ -156,7 +154,9 @@ const submit = () => {
                         </div>
                         <div class="col-lg-6">
                             <span class="text-muted text-secondary fs-6">Genero</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ genero }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">
+                                {{ genero }}
+                            </p>
                             <select v-else class="d-block w-full" v-model="form.genero">
                                 <option label="Hombre">hombre</option>
                                 <option label="Mujer">mujer</option>
@@ -174,25 +174,29 @@ const submit = () => {
                         </div>
                         <div class="col-lg-6">
                             <span class="text-muted text-secondary fs-6"># Celular</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ celular }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">
+                                {{ celular }}
+                            </p>
                             <input v-else class="form-control" type="text" v-model="form.celular">
                             <InputError class="mt-2" :message="form.errors.celular" />
                         </div>
                         <div class="col-lg-6">
                             <span class="text-muted text-secondary fs-6"># Teléfono</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ telefono }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">
+                                {{ telefono }}
+                            </p>
                             <input v-else class="form-control" type="text" v-model="form.telefono">
                             <InputError class="mt-2" :message="form.errors.telefono" />
                         </div>
                         <div class="col-12">
                             <span class="text-muted text-secondary fs-6">Dirección</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ direccion }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">{{ direccion }}</p>
                             <input v-else class="form-control" type="text" v-model="form.direccion">
                             <InputError class="mt-2" :message="form.errors.direccion" />
                         </div>
                         <div class="col-12">
                             <span class="text-muted text-secondary fs-6">Alergias</span>
-                            <p v-if="!data.editMode" class="text-muted text-secondary fw-bold">{{ alergias }}</p>
+                            <p v-if="!data.editMode || (data.editMode && !isPaciente)" class="text-muted text-secondary fw-bold">{{ alergias }}</p>
                             <input v-else class="form-control" type="text" v-model="form.alergias">
                             <InputError class="mt-2" :message="form.errors.alergias" />
                         </div>
@@ -218,7 +222,7 @@ const submit = () => {
             <div class="col-lg-4 mt-2">
                 <Indicador
                     texto="Altura"
-                    img="../../images/icons/Altura.png"
+                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Altura.png"
                     :edit-mode="data.editMode"
                     :valor="altura"
                 >
@@ -234,7 +238,7 @@ const submit = () => {
                 </Indicador>
                 <Indicador
                     texto="Peso"
-                    img="../../images/icons/Peso.png"
+                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Peso.png"
                     :edit-mode="data.editMode"
                     :valor="peso"
                 >
@@ -249,8 +253,8 @@ const submit = () => {
                     <InputError class="mt-2" :message="form.errors.tipo_peso" />
                 </Indicador>
                 <Indicador
-                    texto="Peso"
-                    img="../../images/icons/Imc.png"
+                    texto="I.M.C"
+                    img="https://citavitalassets.s3.amazonaws.com/images/icons/IMC.png"
                     :edit-mode="data.editMode"
                     :valor="imc"
                     :error="form.errors.imc"
@@ -259,7 +263,7 @@ const submit = () => {
                 </Indicador>
                 <Indicador
                     texto="Presión Arterial"
-                    img="../../images/icons/Presion.png"
+                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Presion.png"
                     :edit-mode="data.editMode"
                     :valor="presionArterial"
                     :error="form.errors.presion_arterial"

@@ -3,8 +3,11 @@
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\ExamenController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PacienteController;
 use App\Models\Doctor;
 use Illuminate\Foundation\Application;
@@ -54,16 +57,23 @@ Route::middleware([
         Route::get('citas/list', [CitaController::class, 'lista'])->name('citas.list');
         Route::resource('citas', CitaController::class);
 
+
+        Route::get('/pacientes/{paciente}/medicamentos', [MedicamentoController::class, 'lista'])->name('medicamentos.list');
+        Route::post('/pacientes/{paciente}/medicamentos', [MedicamentoController::class, 'store'])->name('medicamentos.store');
+        Route::get('/pacientes/{paciente}/examenes/{examen}', [ExamenController::class, 'show'])->name('examenes.show');
+        Route::get('/pacientes/{paciente}/examenes', [ExamenController::class, 'lista'])->name('examenes.list');
+        Route::post('/pacientes/{paciente}/examenes', [ExamenController::class, 'store'])->name('examenes.store');
+        Route::get('/pacientes/{paciente}/notas', [NotaController::class, 'lista'])->name('notas.list');
+        Route::post('/pacientes/{paciente}/notas', [NotaController::class, 'store'])->name('notas.store');
         Route::resource('pacientes', PacienteController::class);
 
         Route::get('doctores/list', [DoctorController::class, 'listado'])->name('doctores.list');
         Route::resource('doctores', DoctorController::class);
-
         Route::resource('historial', HistorialController::class);
     });
 
     Route::get('/doctores-list', function () {
-        return Doctor::select('email')->get();
+        return Doctor::select('email', 'name')->get();
     });
 
 });

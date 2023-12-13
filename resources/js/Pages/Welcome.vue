@@ -40,7 +40,7 @@ const teamList = [
                         <button class="btn btn-primary fw-bolder text-uppercase">Agendar Cita</button>
 
                     </div>
-                    <img src="../../images/doctor.png" class="doctor-img" style="height: 400px;">
+                    <img src="https://citavitalassets.s3.amazonaws.com/images/doctor.png" class="doctor-img" style="height: 400px;">
                 </div>
             </div>
 

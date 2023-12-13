@@ -38,7 +38,7 @@ fetch(route('hospitales.index'))
                 <div class="col-lg-6">
                     <GenericCard
                         title="Mis Citas"
-                        backgroundImage="../../images/app/mis-citas.jpeg"
+                        backgroundImage="https://citavitalassets.s3.amazonaws.com/images/app/mis-citas.jpeg"
                         :onTop="true"
                         :links="misCitasLinks"
                     ></GenericCard>
@@ -47,7 +47,7 @@ fetch(route('hospitales.index'))
                     <GenericCard
                         title="Agendar Visita"
                         backgroundColor="bg-baby-blue"
-                        backgroundImage="../../images/doctor.png"
+                        backgroundImage="https://citavitalassets.s3.amazonaws.com/images/doctor.png"
                         :links="miPerfilLinks"
                     ></GenericCard>
                 </div>
@@ -56,7 +56,7 @@ fetch(route('hospitales.index'))
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4">
-                            <img src="../../../images/app/checklist.png" class="img-fluid" />
+                            <img src="https://citavitalassets.s3.amazonaws.com/images/app/checklist.png" class="img-fluid" />
                         </div>
                         <div class="col-lg-8">
                             <h2 class="fw-bolder">Último Diagnostico Médico</h2>
@@ -76,7 +76,7 @@ fetch(route('hospitales.index'))
             <GenericCard
                 title="Clinicas Afiliadas"
                 backgroundColor="bg-baby-blue"
-                backgroundImage="../../images/app/clinicas-afiliadas.png"
+                backgroundImage="https://citavitalassets.s3.amazonaws.com/images/app/clinicas-afiliadas.png"
                 :links="data.hospitales">
             </GenericCard>
         </div>

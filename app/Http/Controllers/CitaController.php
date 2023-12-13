@@ -22,18 +22,27 @@ class CitaController extends Controller
     public function lista()
     {
         $mostrar = 'actuales';
+        $user = request()->user();
 
         if (request()->has('mostrar'))
         {
             $mostrar = request()->get('mostrar');
         }
 
-        $citas = Cita::with(['doctor', 'hospital'])
-            ->where('usuario_id', request()->user()->id);
+        $citas = Cita::with(['doctor', 'hospital', 'paciente']);
+
+        if ($user->tipo_usuario == 'paciente')
+        {
+            $citas = $citas->where('usuario_id', $user->id);
+        }
+        else if ($user->tipo_usuario == 'doctor')
+        {
+            $citas = $citas->where('doctor_id', $user->id);
+        }
 
         if ($mostrar == 'pasadas')
         {
-            $citas = $citas->where('fecha', '<=', date('Y-m-d'))
+            $citas = $citas->where('fecha', '<', date('Y-m-d'))
                 ->where('cancelada', false);
         }
         else if($mostrar == 'actuales')
