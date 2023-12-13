@@ -2,16 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Doctor;
-use App\Models\DoctorEspecialidad;
-use App\Models\DoctorHospital;
-use App\Models\Especialidad;
-use App\Models\Hospital;
+use App\Models\DoctorTratamiento;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DoctorHospitalFactory extends Factory
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DoctorTratamiento>
+ */
+class DoctorTratamientoFactory extends Factory
 {
-    protected $model = DoctorHospital::class;
+    protected $model = DoctorTratamiento::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +21,7 @@ class DoctorHospitalFactory extends Factory
     {
         return [
             //'doctor_id' => Doctor::all()->random()->id,
-            'hospital_id' => Hospital::all()->random()->id,
+            'tratamiento' => $this->faker->text(80),
         ];
     }
 }
-

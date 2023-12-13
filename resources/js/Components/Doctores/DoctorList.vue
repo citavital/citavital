@@ -75,7 +75,7 @@ if (data.tabs !== undefined) {
                     <label class="sr-only">Seleccione un tab</label>
                     <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
                     <select class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                        <option v-for="tab in tabs" :value="tab.id">{{ tab.name }}</option>
+                        <option v-for="tab in data.tabs" :value="tab.id">{{ tab.name }}</option>
                     </select>
                 </div>
                 <div class="hidden sm:block">
@@ -102,9 +102,12 @@ if (data.tabs !== undefined) {
                 :key="hospital.id + '-' + index">
                 <div v-if="hospital.id === data.currentTab">
                     <p class="my-3 fs-6">{{ hospital.hospital.direccion }}</p>
-                    <i class="fa fa-phone text-info fs-5"></i><span class="ms-2">{{ hospital.hospital.telefono_1 }}</span>
+                    <i class="fa fa-phone text-info fs-5"></i>
+                    <span class="ms-2">{{ hospital.hospital.telefono_1 }}</span>
                     <template v-if="hospital.hospital.telefono_2">
-                        <i class="fa fa-phone text-info fs-5 ms-2"></i><span class="ms-2">{{ hospital.hospital.telefono_2 }}</span>
+                        <i class="fa fa-phone text-info fs-5 ms-2"></i><span class="ms-2">
+                        {{ hospital.hospital.telefono_2 }}
+                    </span>
                     </template>
                 </div>
             </template>

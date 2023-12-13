@@ -29,6 +29,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property $imc
  * @property $presion_arterial
  * @property $alergias
+ * @property $enfoque
+ * @property $idiomas
  * @since 1.0
  * @package App\Models
  */
@@ -94,5 +96,10 @@ class User extends Authenticatable
     public function doctorEspecialidad(): HasMany
     {
         return $this->hasMany(DoctorEspecialidad::class, 'doctor_id');
+    }
+
+    public function doctorTratamiento()
+    {
+        return $this->hasMany(DoctorTratamiento::class, 'doctor_id');
     }
 }

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Doctor;
 use App\Models\DoctorEspecialidad;
 use App\Models\DoctorHospital;
+use App\Models\DoctorTratamiento;
 use App\Models\Especialidad;
 use App\Models\Hospital;
 use App\Models\User;
@@ -26,9 +27,12 @@ class DatabaseSeeder extends Seeder
 
     public function addDoctors()
     {
-        Doctor::factory()->count(50)->create();
-        DoctorHospital::factory()->count(100)->create();
-        DoctorEspecialidad::factory()->count(100)->create();
+        Doctor::factory()
+            ->count(50)
+            ->has(DoctorHospital::factory()->count(rand(1, 2)))
+            ->has(DoctorEspecialidad::factory()->count(rand(1, 3)))
+            ->has(DoctorTratamiento::factory()->count(rand(2, 4)))
+            ->create();
     }
 
     public function hospitales()

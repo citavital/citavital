@@ -41,12 +41,24 @@ Route::middleware([
     })->name('dashboard');
 
     Route::prefix('app')->group(function () {
+
+        Route::get(
+            'hospitales/{hospital}/doctores/{doctor}/agendar/{fecha}',
+            [DoctorController::class, 'agendar'])
+            ->name('doctores.agendar');
+
         Route::get('hospitales', [HospitalController::class, 'index'])->name('hospitales.index');
+
         Route::get('especialidades', [EspecialidadController::class, 'index'])->name('especialidades.index');
+
+        Route::get('citas/list', [CitaController::class, 'lista'])->name('citas.list');
         Route::resource('citas', CitaController::class);
+
         Route::resource('pacientes', PacienteController::class);
+
         Route::get('doctores/list', [DoctorController::class, 'listado'])->name('doctores.list');
         Route::resource('doctores', DoctorController::class);
+
         Route::resource('historial', HistorialController::class);
     });
 

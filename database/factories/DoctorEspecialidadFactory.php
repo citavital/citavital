@@ -22,7 +22,7 @@ class DoctorEspecialidadFactory extends Factory
     public function definition(): array
     {
         return [
-            'doctor_id' => Doctor::all()->random()->id,
+            //'doctor_id' => Doctor::all()->random()->id,
             'especialidad_id' => Especialidad::all()->random()->id,
         ];
     }

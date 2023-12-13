@@ -45,7 +45,8 @@ const close = () => {
                 <slot name="title" />
             </div>
 
-            <div class="mt-4 text-sm text-gray-600">
+
+            <div class="text-sm text-gray-600">
                 <slot name="content" />
             </div>
         </div>

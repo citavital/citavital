@@ -20,6 +20,11 @@ class DoctorFactory extends Factory
      */
     public function definition(): array
     {
+        $idiomas = ['Ingles', 'Español', 'Frances', 'Italiano'];
+        $enfoques = ['Adultos Mayores', 'Adultos Jovenes', 'Niños', 'Cancer', 'Cuidados Paleativos', 'Salud Mental', 'Nutrición'];
+        $enfoques_arr = $this->arrayData($enfoques, 2, 3);
+        $idiomas_arr = $this->arrayData($idiomas, 1, 3);
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
@@ -31,6 +36,30 @@ class DoctorFactory extends Factory
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
+            'enfoque' => implode(" / ", $enfoques_arr),
+            'idiomas' => implode(" / ", $idiomas_arr),
+            'facebook' => $this->faker->boolean ? 'https://facebook.com' : null,
+            'instagram' => $this->faker->boolean ? 'https://instagram.com' : null,
+            'website' => $this->faker->boolean ? 'https://citavital' : null,
         ];
+    }
+
+    public function arrayData($arr, $min, $max)
+    {
+        $indexes = [];
+        $total = rand($min, $max);
+        $keys = array_rand($arr, $total);
+
+        if (!is_array($keys))
+        {
+            return [$arr[$keys]];
+        }
+
+        foreach ($keys as $key)
+        {
+            $indexes[] = $arr[$key];
+        }
+
+        return $indexes;
     }
 }

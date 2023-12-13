@@ -77,7 +77,7 @@ fetch(route('especialidades.index'))
             </template>
             <template v-slot:content>
                 <div class="h-100 w-full">
-                    <DoctorShow :doctor="data.doctor" />
+                    <DoctorShow :doctor="data.doctor" @close="onClose" />
                 </div>
             </template>
         </DialogModal>
