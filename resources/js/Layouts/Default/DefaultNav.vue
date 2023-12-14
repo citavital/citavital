@@ -24,6 +24,9 @@ const logout = () => {
                         <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item nav-link">
+                        <a :href="route('ayuda.index')" class="nav-link">Ayuda</a>
+                    </li>
+                    <li class="nav-item nav-link">
                         <a :href="route('contacto.index')" class="nav-link">Contacto</a>
                     </li>
                 </ul>

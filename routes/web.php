@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AyudaController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\DoctorController;
@@ -35,6 +36,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/ayuda', [AyudaController::class, 'index'])->name('ayuda.index');
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto.index');
 Route::post('/contacto/mail', [ContactoController::class, 'email'])->name('contacto.mail');
 
