@@ -24,10 +24,7 @@ const logout = () => {
                         <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item nav-link">
-                        <a href="#" class="nav-link">Servicio</a>
-                    </li>
-                    <li class="nav-item nav-link">
-                        <a href="#" class="nav-link">Contacto</a>
+                        <a :href="route('contacto.index')" class="nav-link">Contacto</a>
                     </li>
                 </ul>
                 <div class="nav-button ms-auto">

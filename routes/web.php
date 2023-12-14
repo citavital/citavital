@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\ExamenController;
@@ -34,11 +35,15 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto.index');
+Route::post('/contacto/mail', [ContactoController::class, 'email'])->name('contacto.mail');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -58,6 +63,7 @@ Route::middleware([
         Route::resource('citas', CitaController::class);
 
 
+        Route::post('/pacientes/{paciente}/mensaje', [PacienteController::class, 'email'])->name('pacientes.mensaje');
         Route::get('/pacientes/{paciente}/medicamentos', [MedicamentoController::class, 'lista'])->name('medicamentos.list');
         Route::post('/pacientes/{paciente}/medicamentos', [MedicamentoController::class, 'store'])->name('medicamentos.store');
         Route::get('/pacientes/{paciente}/examenes/{examen}', [ExamenController::class, 'show'])->name('examenes.show');

@@ -4,6 +4,8 @@ import { useForm, usePage } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import Indicador from "@/Components/Indicador.vue";
 
+const emit = defineEmits(['mensaje']);
+
 const data = reactive({
     editMode: false,
 });
@@ -122,23 +124,27 @@ const submit = () => {
     });
 };
 
+const mostrarMensaje = () => {
+    emit('mensaje');
+};
+
 </script>
 <template>
 
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-lg-8 border-end">
-                <button @click="toggleEdit" class="btn p-0 border-0 float-end">
-                    <i v-if="!data.editMode" class="fa fa-pencil text-success fa-lg"></i>
-                    <i v-if="data.editMode" class="fa fa-close text-danger fa-lg"></i>
-                </button>
-                <img
-                    src="https://source.boringavatars.com/beam/120/Eunice%20Kennedy?colors=264653,f4a261,e76f51"
-                    class="mx-auto d-block img-fluid">
-                <h3 class="fw-bolder text-center mt-2">{{ me.name }}</h3>
-                <p v-if="sufreAlergias" class="fw-bold fs-5 text-center text-danger">Alergias</p>
-                <form @submit.prevent="submit">
+        <form @submit.prevent="submit">
+            <div class="row">
+                <div class="col-lg-8 border-end">
+                    <button type="button" @click="toggleEdit" class="btn p-0 border-0 float-end">
+                        <i v-if="!data.editMode" class="fa fa-pencil text-success fa-lg"></i>
+                        <i v-if="data.editMode" class="fa fa-close text-danger fa-lg"></i>
+                    </button>
+                    <img
+                        src="https://source.boringavatars.com/beam/120/Eunice%20Kennedy?colors=264653,f4a261,e76f51"
+                        class="mx-auto d-block img-fluid">
+                    <h3 class="fw-bolder text-center mt-2">{{ me.name }}</h3>
+                    <p v-if="sufreAlergias" class="fw-bold fs-5 text-center text-danger">Alergias</p>
                     <div class="row text-center text-lg-start">
                         <div class="col-lg-6">
                             <span class="text-muted text-secondary fs-6">Fecha de Nacimiento</span>
@@ -201,77 +207,80 @@ const submit = () => {
                             <InputError class="mt-2" :message="form.errors.alergias" />
                         </div>
                     </div>
-                    <div v-if="data.editMode" class="row">
-                        <div class="col-12">
-                            <button
-                                type="submit"
-                                class="btn btn-blue w-100 text-uppercase"
-                                :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                            >
-                                Guardar
-                            </button>
+                </div>
+                <div class="col-lg-4 mt-2">
+                    <Indicador
+                        texto="Altura"
+                        img="https://citavitalassets.s3.amazonaws.com/images/icons/Altura.png"
+                        :edit-mode="data.editMode"
+                        :valor="altura"
+                    >
+                        <div class="flex justify-between">
+                            <input class="form-control me-1" type="text" v-model="form.altura" />
+                            <select v-model="form.tipo_altura">
+                                <option label="Metros">metros</option>
+                                <option label="Pies">pies</option>
+                            </select>
                         </div>
-                    </div>
-                </form>
-                <div v-if="!myProfile" class="row">
-                    <div class="col-12">
-                        <button class="btn btn-blue w-100 text-uppercase">Enviar Mensaje</button>
-                    </div>
+                        <InputError class="mt-2" :message="form.errors.altura" />
+                        <InputError class="mt-2" :message="form.errors.tipo_altura" />
+                    </Indicador>
+                    <Indicador
+                        texto="Peso"
+                        img="https://citavitalassets.s3.amazonaws.com/images/icons/Peso.png"
+                        :edit-mode="data.editMode"
+                        :valor="peso"
+                    >
+                        <div class="flex justify-between">
+                            <input class="form-control me-1" type="text" v-model="form.peso" />
+                            <select v-model="form.tipo_peso">
+                                <option label="Libras">libras</option>
+                                <option label="Kilos">kilos</option>
+                            </select>
+                        </div>
+                        <InputError class="mt-2" :message="form.errors.peso" />
+                        <InputError class="mt-2" :message="form.errors.tipo_peso" />
+                    </Indicador>
+                    <Indicador
+                        texto="I.M.C"
+                        img="https://citavitalassets.s3.amazonaws.com/images/icons/IMC.png"
+                        :edit-mode="data.editMode"
+                        :valor="imc"
+                        :error="form.errors.imc"
+                    >
+                        <input class="form-control me-1" type="text" v-model="form.imc" />
+                    </Indicador>
+                    <Indicador
+                        texto="Presión Arterial"
+                        img="https://citavitalassets.s3.amazonaws.com/images/icons/Presion.png"
+                        :edit-mode="data.editMode"
+                        :valor="presionArterial"
+                        :error="form.errors.presion_arterial"
+                    >
+                        <input class="form-control me-1" type="text" v-model="form.presion_arterial" />
+                    </Indicador>
+                </div>
+
+                </div>
+            <div v-if="data.editMode" class="row">
+                <div class="col-12 col-lg-6">
+                    <button
+                        type="submit"
+                        class="btn btn-blue w-100 text-uppercase"
+                        :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                    >
+                        Guardar
+                    </button>
                 </div>
             </div>
-            <div class="col-lg-4 mt-2">
-                <Indicador
-                    texto="Altura"
-                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Altura.png"
-                    :edit-mode="data.editMode"
-                    :valor="altura"
-                >
-                    <div class="flex justify-between">
-                        <input class="form-control me-1" type="text" v-model="form.altura" />
-                        <select v-model="form.tipo_altura">
-                            <option label="Metros">metros</option>
-                            <option label="Pies">pies</option>
-                        </select>
-                    </div>
-                    <InputError class="mt-2" :message="form.errors.altura" />
-                    <InputError class="mt-2" :message="form.errors.tipo_altura" />
-                </Indicador>
-                <Indicador
-                    texto="Peso"
-                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Peso.png"
-                    :edit-mode="data.editMode"
-                    :valor="peso"
-                >
-                    <div class="flex justify-between">
-                        <input class="form-control me-1" type="text" v-model="form.peso" />
-                        <select v-model="form.tipo_peso">
-                            <option label="Libras">libras</option>
-                            <option label="Kilos">kilos</option>
-                        </select>
-                    </div>
-                    <InputError class="mt-2" :message="form.errors.peso" />
-                    <InputError class="mt-2" :message="form.errors.tipo_peso" />
-                </Indicador>
-                <Indicador
-                    texto="I.M.C"
-                    img="https://citavitalassets.s3.amazonaws.com/images/icons/IMC.png"
-                    :edit-mode="data.editMode"
-                    :valor="imc"
-                    :error="form.errors.imc"
-                >
-                    <input class="form-control me-1" type="text" v-model="form.imc" />
-                </Indicador>
-                <Indicador
-                    texto="Presión Arterial"
-                    img="https://citavitalassets.s3.amazonaws.com/images/icons/Presion.png"
-                    :edit-mode="data.editMode"
-                    :valor="presionArterial"
-                    :error="form.errors.presion_arterial"
-                >
-                    <input class="form-control me-1" type="text" v-model="form.presion_arterial" />
-                </Indicador>
+            <div v-if="!myProfile" class="row">
+                <div class="col-12 col-lg-6">
+                    <button type="button" @click.prevent="mostrarMensaje" class="btn btn-blue w-100 text-uppercase">
+                        Enviar Mensaje
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 </template>

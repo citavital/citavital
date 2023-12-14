@@ -23,6 +23,10 @@ const getName = (cita) => {
     return isPaciente.value ? cita.doctor.name : cita.paciente.name;
 };
 
+const getImage = (cita) => {
+    return isPaciente.value ? cita.doctor.profile_photo_url : cita.paciente.profile_photo_url;
+};
+
 watch(() => data.mostrar, async() => {
     loadCitas();
 });
@@ -62,11 +66,11 @@ const loadCitas = () => {
                 <div class="card-body pe-0">
                     <div class="row">
                         <div class="col-lg-3">
-                            <img :src="cita.doctor.profile_photo_url" class="img-fluid rounded-full mx-auto d-block" />
+                            <img :src="getImage(cita)" class="img-fluid rounded-full mx-auto d-block" />
                         </div>
-                        <div class="col-lg-8 text-center flex justify-between pe-0">
-                            <div>
-                                <p v-if="isPaciente" class="fs-5 fw-bold">{{ getName(cita) }}</p>
+                        <div class="col-lg-8 text-center d-lg-flex justify-between pe-0">
+                            <div class="text-center">
+                                <p v-if="isPaciente" class="fs-5 fw-bold text-center">{{ getName(cita) }}</p>
                                 <p v-else class="underline">
                                     <a :href="route('pacientes.show', { paciente: cita.usuario_id })">
                                         <span class="fs-5 fw-bold">{{ getName(cita) }}</span>
@@ -78,7 +82,10 @@ const loadCitas = () => {
                             </div>
                             <div>
                                 <button v-if="data.mostrar === 'actuales'" type="button" @click.prevent="onCancel(cita)">
-                                    <i class="fa fa-xl fa-close text-red-500"></i>
+                                    <i class="fa fa-xl fa-close text-red-500 hidden d-lg-block"></i>
+                                    <span class="d-block d-lg-none text-red-500 focus:text-red-600 hover:text-red-600">
+                                        Cancelar
+                                    </span>
                                 </button>
                             </div>
                         </div>

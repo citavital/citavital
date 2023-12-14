@@ -6,6 +6,7 @@ use App\Mail\CitaAgendada;
 use App\Mail\CitaCancelada;
 use App\Models\Cita;
 use App\Models\Doctor;
+use App\Models\Hospital;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -84,11 +85,34 @@ class CitaController extends Controller
 
     public function show(Cita $cita)
     {
-        return Inertia::render('App/Citas/CitasShow');
+        $user = request()->user()->id;
+
+        if ($cita->usuario_id != $user && $cita->doctor_id !== $user)
+        {
+            abort(404);
+        }
+
+        $paciente = User::findOrFail($cita->usuario_id);
+        $doctor = User::findOrFail($cita->doctor_id);
+        $hospital = Hospital::findOrFail($cita->hospital_id);
+
+        return Inertia::render('App/Citas/CitasShow')->with([
+            'cita' => $cita,
+            'doctor' => $doctor,
+            'paciente' => $paciente,
+            'hospital' => $hospital,
+        ]);
     }
 
     public function destroy(Cita $cita)
     {
+        $user = request()->user()->id;
+
+        if ($cita->usuario_id != $user && $cita->doctor_id !== $user)
+        {
+            abort(404);
+        }
+
         if ($cita->cancelada || $cita->fecha < date('Y-m-d'))
         {
             return response()->json(['exito' => true]);

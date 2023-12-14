@@ -7,6 +7,7 @@ import { useForm } from "@inertiajs/vue3";
 import Medicamentos from "@/Components/Pacientes/Medicamentos.vue";
 import Notas from "@/Components/Pacientes/Notas.vue";
 import Examenes from "@/Components/Pacientes/Examenes.vue";
+import Mensaje from "@/Components/Pacientes/Mensaje.vue";
 
 const props = defineProps({
     me: Object,
@@ -24,6 +25,7 @@ const data = reactive({
     mostrarNota: false,
     historialList: [],
     mostrarExamen: false,
+    mostrarMensaje: false,
 });
 
 const loadMedicamentos = () => {
@@ -75,6 +77,18 @@ const onCloseNota = () => {
     data.mostrarNota = false;
 };
 
+const onMensaje = () => {
+    alert('Se ha enviado el mensaje exitosamente.');
+};
+
+const onMostrarMensaje = () => {
+    data.mostrarMensaje = true;
+};
+
+const onCloseMensaje = () => {
+    data.mostrarMensaje = false;
+};
+
 const onMostrarExamen = () => {
     data.mostrarExamen = true;
 };
@@ -115,10 +129,16 @@ onMounted(async() => {
             @load="loadExamenes"
             @close="onCloseExamen"
         />
+        <Mensaje
+            :me="me"
+            :mostrar-form="data.mostrarMensaje"
+            @load="onMensaje"
+            @close="onCloseMensaje"
+        />
 
         <div class="row container-fluid py-2">
             <div class="col-xl-5">
-                <PacienteCard :me="me" :my-profile="myProfile" />
+                <PacienteCard :me="me" :my-profile="myProfile" @mensaje="onMostrarMensaje" />
             </div>
             <div class="col-xl-3 mt-3 mt-xl-0">
                 <!-- Medicamentos -->
@@ -132,7 +152,6 @@ onMounted(async() => {
                         </div>
                     </div>
                     <div class="card-body p-0">
-
                         <h4
                             v-if="data.medicamentos.length === 0"
                             class="fw-bold p-3 fs-5 text-center underline">

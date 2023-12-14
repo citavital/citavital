@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePacienteRequest;
+use App\Mail\MensajeDoctor;
 use App\Models\HistorialPaciente;
 use App\Http\Requests\StoreHistorialPacienteRequest;
 use App\Http\Requests\UpdateHistorialPacienteRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class PacienteController extends Controller
@@ -124,6 +127,13 @@ class PacienteController extends Controller
         $paciente->alergias = $request->alergias;
 
         $paciente->save();
+    }
+
+    public function email(Request $request, User $paciente)
+    {
+        $doctor = request()->user();
+        Mail::to($paciente->email)->send(new MensajeDoctor($paciente, $doctor, $request->mensaje));
+
     }
 
     /**
