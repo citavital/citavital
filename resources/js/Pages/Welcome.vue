@@ -2,24 +2,36 @@
 import { Head, Link } from '@inertiajs/vue3';
 import TeamMember from "@/Components/TeamMember.vue";
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
+import { onMounted, reactive } from "vue";
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
 });
 
-const teamList = [
-    { name: 'Jonathan Chanis', rol: 'Backend', photo_url: 'https://source.boringavatars.com/beam/120/Mary Baker?colors=264653,f4a261,e76f51' },
-    { name: 'Enrique García', rol: 'Backend/DevOps', photo_url: 'https://source.boringavatars.com/beam/120/Eunice Kennedy?colors=264653,f4a261,e76f51' },
-    { name: 'Joseph Boden', rol: 'Backend', photo_url: 'https://source.boringavatars.com/beam/120/Sarah Winnemucca?colors=264653,f4a261,e76f51' },
-    { name: 'Miguel Tamburrelli', rol: 'Frontend', photo_url: 'https://source.boringavatars.com/beam/120/Coretta Scott?colors=264653,f4a261,e76f51' },
-    { name: 'Julio Sanchez', rol: 'Frontend', photo_url: 'https://source.boringavatars.com/beam/120/Willa Cather?colors=264653,f4a261,e76f51' },
-    { name: 'Jose Dondis', rol: 'Marketing', photo_url: 'https://source.boringavatars.com/beam/120/Grace Hopper?colors=264653,f4a261,e76f51' },
-    { name: 'Jordan Rodriguez', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Florence Chadwick?colors=264653,f4a261,e76f51' },
-    { name: 'Urbano Iguala', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Harriet Tubman?colors=264653,f4a261,e76f51' },
-    { name: 'Antony Jones', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Sacagawea?colors=264653,f4a261,e76f51' },
-    { name: 'Oniel Arias', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Ma Rainey?colors=264653,f4a261,e76f51' },
-];
+const getUrl = (name) => {
+    return 'https://citavitalassets.s3.amazonaws.com/images/equipo/' + name;
+};
+
+const data = reactive({
+   teamList: [],
+});
+
+onMounted(() => {
+    data.teamList = [
+        { name: 'Jonathan Chanis', rol: 'Project Manager', photo_url: getUrl('Jonathan+Chanis.jpg'), aws: true, },
+        { name: 'Enrique García', rol: 'Tech Lead', photo_url: getUrl('Enrique+Garcia.png'), aws: true },
+        { name: 'Urbano Iguala', rol: 'UI/UX', photo_url: getUrl('Urban+Iguala.jpeg'), aws: true },
+        { name: 'Julio Sanchez', rol: 'Frontend', photo_url: getUrl('Julio+Sanchez.jpeg'), aws: true },
+        { name: 'Joseph Boden', rol: 'Backend', photo_url: getUrl('Joseph+bodden.jpg'), aws: true },
+        { name: 'Jose Dondis', rol: 'Marketing', photo_url: getUrl('Jose+Dondis.png'), aws: true },
+        { name: 'Ricardo Guo', rol: 'Marketing', photo_url: getUrl('Ricardo+Guo.png'), aws: true },
+        { name: 'Miguel Tamburrelli', rol: 'Frontend', photo_url: 'https://source.boringavatars.com/beam/120/Coretta Scott?colors=264653,f4a261,e76f51', aws: false  },
+        { name: 'Jordan Rodriguez', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Florence Chadwick?colors=264653,f4a261,e76f51', aws: false },
+        { name: 'Antony Jones', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Sacagawea?colors=264653,f4a261,e76f51', aws: false },
+        { name: 'Oniel Arias', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Ma Rainey?colors=264653,f4a261,e76f51', aws: false },
+    ];
+});
 
 </script>
 
@@ -94,7 +106,7 @@ const teamList = [
                     <div class="col-lg-10 offset-lg-1">
                         <h1 class="fw-bolder text-center">Conoce a Nuestro Equipo</h1>
                         <div class="row mt-2 mt-lg-4">
-                            <TeamMember v-for="member of teamList" :info="member"></TeamMember>
+                            <TeamMember v-for="member of data.teamList" :info="member"></TeamMember>
                         </div>
                     </div>
                 </div>
