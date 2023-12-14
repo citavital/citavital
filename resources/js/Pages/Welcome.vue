@@ -26,10 +26,10 @@ onMounted(() => {
         { name: 'Joseph Boden', rol: 'Backend', photo_url: getUrl('Joseph+bodden.jpg'), aws: true },
         { name: 'Jose Dondis', rol: 'Marketing', photo_url: getUrl('Jose+Dondis.png'), aws: true },
         { name: 'Ricardo Guo', rol: 'Marketing', photo_url: getUrl('Ricardo+Guo.png'), aws: true },
-        { name: 'Miguel Tamburrelli', rol: 'Frontend', photo_url: 'https://source.boringavatars.com/beam/120/Coretta Scott?colors=264653,f4a261,e76f51', aws: false  },
-        { name: 'Jordan Rodriguez', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Florence Chadwick?colors=264653,f4a261,e76f51', aws: false },
-        { name: 'Antony Jones', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Sacagawea?colors=264653,f4a261,e76f51', aws: false },
+        { name: 'Miguel Tamburrelli', rol: 'Frontend', photo_url: getUrl('Miguel+Tamburelli.jpg'), aws: false  },
+        { name: 'Antony Jones', rol: 'UI/UX', photo_url: getUrl('Anthony+Jones.jpg'), aws: false },
         { name: 'Oniel Arias', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Ma Rainey?colors=264653,f4a261,e76f51', aws: false },
+        { name: 'Jordan Rodriguez', rol: 'UI/UX', photo_url: 'https://source.boringavatars.com/beam/120/Florence Chadwick?colors=264653,f4a261,e76f51', aws: false },
     ];
 });
 
