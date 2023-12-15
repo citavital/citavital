@@ -9,10 +9,12 @@
                     <div class="text-muted mt-4">
                         <ul class="list-unstyled footer-list">
                             <li><a
+                                :href="route('home')"
                                 class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Inicio</a>
                             </li>
 
                             <li><a
+                                :href="route('contacto.index')"
                                 class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Contactanos
                             </a></li>
                         </ul>
@@ -49,7 +51,10 @@
                 </div>
             </div>
             <div class="row">
-                <a href="https://www.instagram.com/citavitalapp"><i class="fa fa-instagram fs-1 text-white"></i></a>
+                <div class="col-12">
+                    <a href="https://www.instagram.com/citavitalapp"><i class="fa fa-instagram fs-1 text-white"></i></a>
+                    <a href="https://twitter.com/citavital" class="ms-2"><i class="fa fa-twitter fs-1 text-white"></i></a>
+                </div>
             </div>
             <p class="link-dark">© Cita Vital 2023. Todos los Derechos Reservados.</p>
         </div>
