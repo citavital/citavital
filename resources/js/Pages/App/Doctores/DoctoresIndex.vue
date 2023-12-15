@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { computed, reactive } from "vue";
+import {computed, onMounted, reactive} from "vue";
 import DoctorList from "@/Components/Doctores/DoctorList.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import DoctorShow from "@/Components/Doctores/DoctorShow.vue";
@@ -24,6 +24,10 @@ const onOpen = (doctor) => {
     data.doctor = doctor;
 };
 
+onMounted(async() => {
+    loadDoctores();
+});
+
 const loadDoctores = () => {
     fetch(route('doctores.list', { hospital: data.hospital, especialidad: data.especialidad }))
         .then(res => res.json())
@@ -33,7 +37,8 @@ const loadDoctores = () => {
 };
 
 const canSubmit = computed(() => {
-    return data.especialidad !== null;
+    return true;
+    //return data.especialidad !== null;
 });
 
 fetch(route('hospitales.index'))

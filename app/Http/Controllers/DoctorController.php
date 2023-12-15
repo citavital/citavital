@@ -33,7 +33,10 @@ class DoctorController extends Controller
                 ->where('doctor_hospitales.hospital_id', $request->hospital);
         }
 
-        $query = $query->where('doctor_especialidades.especialidad_id', $request->especialidad);
+        if ($request->has('especialidad'))
+        {
+            $query = $query->where('doctor_especialidades.especialidad_id', $request->especialidad);
+        }
 
         return $query->distinct()->get();
     }
