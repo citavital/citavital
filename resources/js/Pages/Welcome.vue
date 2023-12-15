@@ -48,7 +48,7 @@ onMounted(() => {
                             Encuentra un doctor y haz tu cita
                         </h1>
                         <p class="pt-3 home-desc fw-bold fs-3">Accede a la excelencia médica: los mejores hospitales y especialistas del país a tu servicio. Tu salud merece lo mejor.</p>
-                        <button class="btn btn-primary fw-bolder text-uppercase">Agendar Cita</button>
+                        <a :href="route('doctores.index')" class="btn btn-primary fw-bolder text-uppercase">Agendar Cita</a>
 
                     </div>
                     <img src="https://citavitalassets.s3.amazonaws.com/images/doctor.png" class="doctor-img" style="height: 400px;">
